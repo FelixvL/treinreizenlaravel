@@ -11,6 +11,7 @@
 |
 */
     use App\Client;
+    use App\OVChipCard;
 
 Route::get('/', function () {
     return "treinreizen";
@@ -22,3 +23,8 @@ Route::get('/overviewclients', function(){
 
 Route::get('/newclient/{clientnr}', 'ClientsController@create');
 Route::post('/newclient' , 'ClientsController@postcreate');
+Route::get('/checksaldo',function(){
+    $card = OVChipCard::find(1);
+    $saldo = $card->client();
+    return view('card')->with('card',$card);
+});
