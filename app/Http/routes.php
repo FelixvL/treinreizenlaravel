@@ -24,7 +24,11 @@ Route::get('/overviewclients', function(){
 Route::get('/newclient/{clientnr}', 'ClientsController@create');
 Route::post('/newclient' , 'ClientsController@postcreate');
 Route::get('/checksaldo',function(){
-    $card = OVChipCard::find(1);
-    $saldo = $card->client();
-    return view('card')->with('card',$card);
+      $client = Client::where('id',1)->first();
+      $card = $client->ovchipcard;
+      return $client->name. " heeft nog: ".$card->saldo;
+
+//    $card = OVChipCard::find(1);
+//    $saldo = $card->client();
+//    return view('card')->with('card',$card);
 });
